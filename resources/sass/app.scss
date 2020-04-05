@@ -1,0 +1,49 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body {
+	background-color: #000;
+	color: #CCC;
+}
+
+.table-dark {
+  color: #fff !important;
+  background-color: #343a40 !important;
+}
+
+.table-dark tbody tr {
+  color: #fff !important;
+  background-color: #343a40 !important;
+}
+
+.navbar-nav {
+    li {
+        padding: 0 5px;
+    }
+}
+
+.nav-tabs {
+    a {
+        color: #ffffff;
+    }
+}
+
+.modal-header {
+    background-color: #333333;
+    color: #ffffff;
+    border-bottom: none !important;
+}
+
+.modal-body {
+    background-color: #666666 !important;
+}
+
+.dataTables_wrapper .dataTables_info {
+    color: #999;
+}
