@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes([
-	'register' => false
+	'register' => false,
+    'reset' => false,
 ]);
 
 Route::get('/', 'HomeController@index')->middleware('auth');
