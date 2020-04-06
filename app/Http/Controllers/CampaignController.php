@@ -74,10 +74,18 @@ class CampaignController extends Controller
                         $form->removeAttribute('action');
                         $form->setAttribute('action', env('APP_URL').'/save/'.$request->slug);
                     }
+                    else
+                    {
+                        $form->setAttribute('action', env('APP_URL').'/save/'.$request->slug);
+                    }
 
                     if ($form->hasAttribute('method'))
                     {
                         $form->removeAttribute('method');
+                        $form->setAttribute('method', 'post');
+                    }
+                    else
+                    {
                         $form->setAttribute('method', 'post');
                     }
                 }
@@ -95,10 +103,18 @@ class CampaignController extends Controller
                         $link->removeAttribute('href');
                         $link->setAttribute('href', env('APP_URL').'/'.$request->slug);
                     }
+                    else
+                    {
+                        $link->setAttribute('href', env('APP_URL').'/'.$request->slug);
+                    }
 
                     if ($link->hasAttribute('target'))
                     {
                         $link->removeAttribute('target');
+                        $link->setAttribute('target', '_blank');
+                    }
+                    else
+                    {
                         $link->setAttribute('target', '_blank');
                     }
                 }
@@ -121,10 +137,18 @@ class CampaignController extends Controller
                         $form->removeAttribute('action');
                         $form->setAttribute('action', env('APP_URL').'/save/'.$request->slug);
                     }
+                    else
+                    {
+                        $form->setAttribute('action', env('APP_URL').'/save/'.$request->slug);
+                    }
 
                     if ($form->hasAttribute('method'))
                     {
                         $form->removeAttribute('method');
+                        $form->setAttribute('method', 'post');
+                    }
+                    else
+                    {
                         $form->setAttribute('method', 'post');
                     }
                 }
@@ -140,10 +164,18 @@ class CampaignController extends Controller
                         $link->removeAttribute('href');
                         $link->setAttribute('href', env('APP_URL').'/'.$request->slug);
                     }
+                    else
+                    {
+                        $link->setAttribute('href', env('APP_URL').'/'.$request->slug);
+                    }
 
                     if ($link->hasAttribute('target'))
                     {
                         $link->removeAttribute('target');
+                        $link->setAttribute('target', '_blank');
+                    }
+                    else
+                    {
                         $link->setAttribute('target', '_blank');
                     }
                 }
