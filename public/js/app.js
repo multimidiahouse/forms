@@ -37060,11 +37060,9 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.slugify = function (obj) {
-  console.log(string);
   var string = obj.value;
   var b = string.replace(/[^a-z0-9-]/gi, '');
   obj.value = b;
-  console.log(b);
   return b;
 };
 
