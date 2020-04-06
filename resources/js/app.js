@@ -6,10 +6,8 @@
 require('./bootstrap');
 
 window.slugify = function(obj) {
-    console.log(string);
     let string = obj.value;
     let b = string.replace(/[^a-z0-9-]/gi,'');
     obj.value = b;
-    console.log(b);
     return b;
 }
