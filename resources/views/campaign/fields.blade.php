@@ -2,7 +2,7 @@
 
 <div class="form-group col-sm-12">
     {!! Form::label('slug', 'URL:') !!}
-    {!! Form::text('slug', isset($campaign) ? $campaign->slug : '', ['class' => 'form-control bg-dark text-white', 'required']) !!}
+    {!! Form::text('slug', isset($campaign) ? $campaign->slug : '', ['class' => 'form-control bg-dark text-white', 'required', 'onkeyup' => 'slugify(this);']) !!}
 </div>
 
 <div class="form-group col-sm-12">
