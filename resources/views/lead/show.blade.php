@@ -14,6 +14,7 @@
                                 <tr>
                                     <th>Info</th>
                                     <th>Data</th>
+                                    <th>Ações</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -21,6 +22,15 @@
                                     <tr>
                                         <td>{{ $lead->information }}</td>
                                         <td>{{ $lead->created_at->format('d/m/Y') }}</td>
+                                        <td>
+                                            {!! Form::open(['route' => ['lead.destroy', $lead->id], 'method' => 'delete']) !!}
+                                            {!! Form::button('<i class="fas fa-trash-alt"></i>', [
+                                                'type' => 'submit',
+                                                'class' => 'btn btn-secondary',
+                                                'onclick' => "return confirm('Tem certeza que deseja remover este registro?')"
+                                            ]) !!}
+                                            {!! Form::close() !!}
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

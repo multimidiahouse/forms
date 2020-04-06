@@ -6,7 +6,6 @@
             <div class="col-md-12">
                 <div class="card bg-dark">
                     <div class="card-header">Campanhas</div>
-
                     <div class="card-body">
                         @if(count($campaigns))
                             <table class="table table-dark" id="campaigns">
@@ -23,8 +22,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                        @else
-                            <a href="/campaign/create">Clique aqui</a> para criar uma campanha.
                         @endif
                     </div>
                 </div>

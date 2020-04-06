@@ -51,4 +51,17 @@ class LeadController extends Controller
             throw $e;
         }
     }
+
+    public function destroy($id)
+    {
+        try
+        {
+            Lead::destroy($id);
+            return back()->withInput();
+        }
+        catch (\Exception $e)
+        {
+            throw $e;
+        }
+    }
 }
