@@ -114,4 +114,30 @@ class CampaignController extends Controller
             throw $e;
         }
     }
+
+    public function download($id)
+    {
+        $campaign = Campaign::find($id);
+        $html = $campaign->html;
+        $tmpName = tempnam(sys_get_temp_dir(), 'index');
+        $file = fopen($tmpName, 'w');
+
+        fwrite($file, $html);
+        fclose($file);
+
+        header('Content-Description: File Transfer');
+        header('Content-Type: text/html');
+        header('Content-Disposition: attachment; filename=index.html');
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($tmpName));
+
+        ob_clean();
+        flush();
+        readfile($tmpName);
+
+        unlink($tmpName);
+    }
 }

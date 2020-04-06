@@ -22,7 +22,7 @@
 								@foreach($campaigns as $campaign)
 									<tr>
 										<td>{{ $campaign->title }}</td>
-										<td>{{ env('APP_URL') . '/' . $campaign->slug }}</td>
+                                        <td><a href="{{ env('APP_URL') . '/' . $campaign->slug }}" target="_blank">{{ env('APP_URL') . '/' . $campaign->slug }}</a></td>
 										<td>{{ $campaign->created_at->format('d/m/Y') }}</td>
 										<td>
                                             <a class="btn btn-secondary" href="/campaign/{{ $campaign->id }}/edit"><i class="fas fa-edit"></i></a>
@@ -30,6 +30,7 @@
                                             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal{{ $campaign->id }}">
                                                 <i class="fas fa-users"></i>
                                             </button>
+                                            <a class="btn btn-secondary" href="/campaign/download/{{ $campaign->id }}" target="_blank"><i class="fas fa-file-download"></i></a>
                                             <div class="modal fade" id="modal{{ $campaign->id }}" tabindex="-1" role="dialog" aria-labelledby="CampaignUser{{ $campaign->id }}" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -53,7 +54,7 @@
                                                                     <th>Nome</th>
                                                                     <th>Email</th>
                                                                 </thead>
-                                                                @if(count($campaignusers) && count($campaignusers[$campaign->id]))
+                                                                @if(count($campaignusers) && isset($campaignusers[$campaign->id]))
                                                                 <tbody>
                                                                     @foreach($campaignusers[$campaign->id] as $campaignuser)
                                                                         <tr>

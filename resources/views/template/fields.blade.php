@@ -26,4 +26,5 @@
 
 <div class="form-group col-sm-12 mt-2">
     {!! Form::submit('salvar', ['class' => 'btn btn-secondary']) !!}
+    <a class="btn btn-secondary" href="{{ route('template.index') }}">voltar</a>
 </div>

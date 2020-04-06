@@ -23,7 +23,7 @@
                                         <td>{{ $template->title }}</td>
                                         <td>{{ $template->created_at->format('d/m/Y') }}</td>
                                         <td>
-                                            <a href="/template/{{ $template->id }}/edit"><i class="fas fa-edit"></i></a>
+                                            <a class="btn btn-secondary" href="/template/{{ $template->id }}/edit"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -22,6 +22,7 @@ Route::get('/', 'HomeController@index')->middleware('auth');
 
 Route::resource('campaign', 'CampaignController')->middleware(['auth','admin']);
 Route::post('campaign/adduser', 'CampaignController@adduser')->middleware(['auth','admin']);
+Route::get('campaign/download/{id}', 'CampaignController@download')->middleware(['auth','admin']);
 
 Route::resource('template', 'TemplateController')->middleware(['auth','admin']);
 Route::resource('user', 'UserController')->middleware(['auth','admin']);

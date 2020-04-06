@@ -27,7 +27,7 @@
                                         <td>{{ ($user->active ? 'SIM' : 'NÃO') }}</td>
                                         <td>{{ $user->created_at->format('d/m/Y') }}</td>
                                         <td>
-                                            <a href="/user/{{ $user->id }}/edit"><i class="fas fa-edit"></i></a>
+                                            <a class="btn btn-secondary" href="/user/{{ $user->id }}/edit"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -27,4 +27,7 @@
 
 <div class="form-group col-sm-12 mt-2">
     {!! Form::submit('salvar', ['class' => 'btn btn-secondary']) !!}
+    <a class="btn btn-secondary" href="{{ env('APP_URL') . '/' . $campaign->slug }}" target="_blank">abrir</a>
+    <a class="btn btn-secondary" href="/campaign/download/{{ $campaign->id }}" target="_blank">download</a>
+    <a class="btn btn-secondary" href="{{ route('campaign.index') }}">voltar</a>
 </div>
