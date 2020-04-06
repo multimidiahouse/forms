@@ -20,7 +20,15 @@
                                 <tbody>
                                 @foreach($leads as $lead)
                                     <tr>
-                                        <td>{{ $lead->information }}</td>
+                                        <td>
+                                            @php
+                                                $fields = json_decode( $lead->information, true );
+                                                foreach ($fields as $key => $value)
+                                                {
+                                                    echo ' ' . $key . ': ' . $value;
+                                                }
+                                            @endphp
+                                        </td>
                                         <td>{{ $lead->created_at->format('d/m/Y') }}</td>
                                         <td>
                                             {!! Form::open(['route' => ['lead.destroy', $lead->id], 'method' => 'delete']) !!}
