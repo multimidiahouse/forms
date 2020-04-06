@@ -38,7 +38,7 @@ class CampaignController extends Controller
 		$template = Template::orderby('created_at', 'desc')->first();
 		if($template)
         {
-            $campaign->html = str_replace('<form>', '<form action="'.env('APP_URL').'/'.$campaign->slug.'" method="post">', $template->html);
+            $campaign->html = str_replace('<form>', '<form action="'.env('APP_URL').'/save/'.$campaign->slug.'" method="post">', $template->html);
             $campaign->response = $template->response;
         }
 
@@ -62,7 +62,7 @@ class CampaignController extends Controller
 			if($campaign)
             {
                 $campaign->title = $request->title;
-                $campaign->html = str_replace('<form>', '<form action="'.env('APP_URL').'/'.$campaign->slug.'" method="post">', $request->html);
+                $campaign->html = str_replace('<form>', '<form action="'.env('APP_URL').'/save/'.$campaign->slug.'" method="post">', $request->html);
                 $campaign->response = $request->response;
                 $campaign->updated_at = date('Y-m-d H:i:s');
                 $campaign->save();
@@ -70,7 +70,7 @@ class CampaignController extends Controller
 			else
             {
                 $input = $request->all();
-                $input['html'] = str_replace('<form>', '<form action="'.env('APP_URL').'/'.$request->slug.'" method="post">', $request->html);
+                $input['html'] = str_replace('<form>', '<form action="'.env('APP_URL').'/save/'.$request->slug.'" method="post">', $request->html);
 			    Campaign::create($input);
             }
 			return back()->withInput();

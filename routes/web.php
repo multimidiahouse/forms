@@ -28,5 +28,5 @@ Route::resource('user', 'UserController')->middleware(['auth','admin']);
 Route::resource('lead', 'LeadController')->middleware(['auth']);
 
 Route::get('/{slug}', 'CampaignController@show');
-Route::post('/{slug}', 'LeadController@store');
+Route::post('/save/{slug}', 'LeadController@store');
 
