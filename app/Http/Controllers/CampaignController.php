@@ -62,7 +62,27 @@ class CampaignController extends Controller
 			if($campaign)
             {
                 $campaign->title = $request->title;
-                $campaign->html = str_replace('<form>', '<form action="'.env('APP_URL').'/save/'.$campaign->slug.'" method="post">', $request->html);
+                $campaign->slug = $request->slug;
+
+                $doc = new \DOMDocument();
+                $doc->loadHTML($request->html);
+                $forms = $doc->getElementsByTagName('form');
+                foreach($forms as $form)
+                {
+                    if ($form->hasAttribute('action'))
+                    {
+                        $form->removeAttribute('action');
+                        $form->setAttribute('action', env('APP_URL').'/save/'.$campaign->slug);
+                    }
+
+                    if ($form->hasAttribute('method'))
+                    {
+                        $form->removeAttribute('method');
+                        $form->setAttribute('method', 'post');
+                    }
+                }
+                $campaign->html = $doc->saveHTML();
+
                 $campaign->response = $request->response;
                 $campaign->updated_at = date('Y-m-d H:i:s');
                 $campaign->save();
@@ -70,7 +90,26 @@ class CampaignController extends Controller
 			else
             {
                 $input = $request->all();
-                $input['html'] = str_replace('<form>', '<form action="'.env('APP_URL').'/save/'.$request->slug.'" method="post">', $request->html);
+
+                $doc = new \DOMDocument();
+                $doc->loadHTML($request->html);
+                $forms = $doc->getElementsByTagName('form');
+                foreach($forms as $form)
+                {
+                    if ($form->hasAttribute('action'))
+                    {
+                        $form->removeAttribute('action');
+                        $form->setAttribute('action', env('APP_URL').'/save/'.$request->slug);
+                    }
+
+                    if ($form->hasAttribute('method'))
+                    {
+                        $form->removeAttribute('method');
+                        $form->setAttribute('method', 'post');
+                    }
+                }
+                $input['html'] = $doc->saveHTML();
+
 			    Campaign::create($input);
             }
 			return back()->withInput();

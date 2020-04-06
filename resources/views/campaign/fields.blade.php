@@ -1,5 +1,10 @@
 {!! Form::hidden('id', isset($campaign) ? $campaign->id : 0) !!}
-{!! Form::hidden('slug', isset($campaign) ? $campaign->slug : '') !!}
+
+<div class="form-group col-sm-12">
+    {!! Form::label('slug', 'URL:') !!}
+    {!! Form::text('slug', isset($campaign) ? $campaign->slug : '', ['class' => 'form-control bg-dark text-white', 'required']) !!}
+</div>
+
 <div class="form-group col-sm-12">
     {!! Form::label('title', 'Título:') !!}
     {!! Form::text('title', isset($campaign) ? $campaign->title : '', ['class' => 'form-control bg-dark text-white', 'required']) !!}
