@@ -31,6 +31,7 @@
                                         </td>
                                         <td>{{ $lead->created_at->format('d/m/Y') }}</td>
                                         <td>
+                                            @if(auth()->user()->admin)
                                             {!! Form::open(['route' => ['lead.destroy', $lead->id], 'method' => 'delete']) !!}
                                             {!! Form::button('<i class="fas fa-trash-alt"></i>', [
                                                 'type' => 'submit',
@@ -38,6 +39,7 @@
                                                 'onclick' => "return confirm('Tem certeza que deseja remover este registro?')"
                                             ]) !!}
                                             {!! Form::close() !!}
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
