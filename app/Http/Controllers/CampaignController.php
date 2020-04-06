@@ -38,7 +38,7 @@ class CampaignController extends Controller
 		$template = Template::orderby('created_at', 'desc')->first();
 		if($template)
         {
-            $campaign->html = str_replace('<form>', '<form action="'.env('APP_URL').'/save/'.$campaign->slug.'" method="post">', $template->html);
+            $campaign->html = $template->html;
             $campaign->response = $template->response;
         }
 
@@ -72,7 +72,7 @@ class CampaignController extends Controller
                     if ($form->hasAttribute('action'))
                     {
                         $form->removeAttribute('action');
-                        $form->setAttribute('action', env('APP_URL').'/save/'.$campaign->slug);
+                        $form->setAttribute('action', env('APP_URL').'/save/'.$request->slug);
                     }
 
                     if ($form->hasAttribute('method'))
@@ -84,6 +84,26 @@ class CampaignController extends Controller
                 $campaign->html = $doc->saveHTML();
 
                 $campaign->response = $request->response;
+
+                $doc = new \DOMDocument();
+                $doc->loadHTML($request->mailing);
+                $links = $doc->getElementsByTagName('a');
+                foreach($links as $link)
+                {
+                    if ($link->hasAttribute('href'))
+                    {
+                        $link->removeAttribute('href');
+                        $link->setAttribute('href', env('APP_URL').'/'.$request->slug);
+                    }
+
+                    if ($link->hasAttribute('target'))
+                    {
+                        $link->removeAttribute('target');
+                        $link->setAttribute('target', '_blank');
+                    }
+                }
+                $campaign->mailing = $doc->saveHTML();
+
                 $campaign->updated_at = date('Y-m-d H:i:s');
                 $campaign->save();
             }
@@ -109,6 +129,25 @@ class CampaignController extends Controller
                     }
                 }
                 $input['html'] = $doc->saveHTML();
+
+                $doc = new \DOMDocument();
+                $doc->loadHTML($request->mailing);
+                $links = $doc->getElementsByTagName('a');
+                foreach($links as $link)
+                {
+                    if ($link->hasAttribute('href'))
+                    {
+                        $link->removeAttribute('href');
+                        $link->setAttribute('href', env('APP_URL').'/'.$request->slug);
+                    }
+
+                    if ($link->hasAttribute('target'))
+                    {
+                        $link->removeAttribute('target');
+                        $link->setAttribute('target', '_blank');
+                    }
+                }
+                $input['mailing'] = $doc->saveHTML();
 
 			    Campaign::create($input);
             }
@@ -157,7 +196,7 @@ class CampaignController extends Controller
     public function download($id)
     {
         $campaign = Campaign::find($id);
-        $html = $campaign->html;
+        $html = $campaign->mailing;
         $tmpName = tempnam(sys_get_temp_dir(), 'index');
         $file = fopen($tmpName, 'w');
 

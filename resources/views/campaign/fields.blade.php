@@ -18,6 +18,9 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#response">Tela Final</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#mailing">Email</a>
+        </li>
     </ul>
 </div>
 
@@ -27,6 +30,9 @@
     </div>
     <div class="tab-pane container fade" id="response">
         {!! Form::textarea('response', isset($campaign) ? $campaign->response : '', ['class' => 'form-control bg-dark text-white', 'id' => 'editor2']) !!}
+    </div>
+    <div class="tab-pane container fade" id="mailing">
+        {!! Form::textarea('mailing', isset($campaign) ? $campaign->mailing : '', ['class' => 'form-control bg-dark text-white', 'id' => 'editor3']) !!}
     </div>
 </div>
 

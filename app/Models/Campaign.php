@@ -12,7 +12,8 @@ class Campaign extends Model
 		'title',
 		'slug',
 		'html',
-        'response'
+        'response',
+        'mailing'
 	];
 
 	protected $casts = [
@@ -20,7 +21,8 @@ class Campaign extends Model
 		'title' => 'string',
 		'slug' => 'string',
 		'html' => 'string',
-        'response' => 'string'
+        'response' => 'string',
+        'mailing' => 'string'
 	];
 
 	public $rules = [];

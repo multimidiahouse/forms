@@ -19,6 +19,7 @@ class CreateCampaignTable extends Migration
 			$table->string('slug');
 			$table->longtext('html');
             $table->longtext('response');
+            $table->longtext('mailing');
             $table->timestamps();
         });
     }

