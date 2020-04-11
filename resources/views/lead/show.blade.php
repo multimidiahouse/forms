@@ -5,7 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header">Infos</div>
+                    <div class="card-header">
+                        <a class="btn btn-secondary" href="/lead/download/{{ $campaign->id }}" target="_blank">Download</a>
+                        <a class="btn btn-secondary" href="#" onclick="destroyAll();">Excluir Tudo</a>
+                    </div>
 
                     <div class="card-body">
                         @if(count($leads))
@@ -54,7 +57,7 @@
                                                 echo implode(';', $string);
                                             @endphp
                                         </td>
-                                        <td>{{ $lead->created_at->format('d/m/Y') }}</td>
+                                        <td>{{ (isset($lead->created_at) ? $lead->created_at->format('d/m/Y') : '') }}</td>
                                         <td>
                                             @if(auth()->user()->admin)
                                             {!! Form::open(['route' => ['lead.destroy', $lead->id], 'method' => 'delete']) !!}
@@ -90,5 +93,12 @@
                 }
             });
         });
+
+        window.destroyAll = function() {
+            if(confirm('Deseja apagar tudo?'))
+            {
+                window.location.href = '/lead/destroyall/{{ $campaign->id }}';
+            }
+        }
     </script>
 @endsection

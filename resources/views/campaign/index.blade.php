@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card bg-dark">
-                <div class="card-header">Campanhas</div>
+                <div class="card-header">
+                    <a class="btn btn-secondary" href="/campaign/create">+ Adicionar</a>
+                </div>
 
                 <div class="card-body">
                     @if(count($campaigns))
@@ -53,6 +55,7 @@
                                                                 <thead>
                                                                     <th>Nome</th>
                                                                     <th>Email</th>
+                                                                    <th>Ação</th>
                                                                 </thead>
                                                                 @if(count($campaignusers) && isset($campaignusers[$campaign->id]))
                                                                 <tbody>
@@ -60,6 +63,9 @@
                                                                         <tr>
                                                                             <td>{{ $campaignuser->name }}</td>
                                                                             <td>{{ $campaignuser->email }}</td>
+                                                                            <td>
+                                                                                <a class="btn btn-secondary" href="/campaign/removeuser/{{ $campaignuser->id }}"><i class="fas fa-trash-alt"></i></a>
+                                                                            </td>
                                                                         </tr>
                                                                     @endforeach
                                                                 </tbody>

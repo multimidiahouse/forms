@@ -39,49 +39,18 @@
                     @auth
                     <ul class="navbar-nav mr-auto">
                         @if(Auth::user()->admin)
+                        <li>
+                            <a class="btn btn-secondary" href="/user">Usuários</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-secondary" href="/template">Templates</a>
+                        </li>
 						<li>
-							<div class="dropdown">
-							  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Campanhas
-							  </button>
-							  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="/campaign">Lista</a>
-								<a class="dropdown-item" href="/campaign/create">Criar</a>
-							  </div>
-							</div>
+                            <a class="btn btn-secondary" href="/campaign">Campanhas</a>
 						</li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Templates
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="/template">Lista</a>
-                                    <a class="dropdown-item" href="/template/create">Criar</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Usuários
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="/user">Lista</a>
-                                    <a class="dropdown-item" href="/user/create">Criar</a>
-                                </div>
-                            </div>
-                        </li>
                         @endif
                         <li>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Infos
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="/lead">Lista</a>
-                                </div>
-                            </div>
+                            <a class="btn btn-secondary" href="/lead">Infos</a>
                         </li>
                     </ul>
                     @endauth

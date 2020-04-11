@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header">Campanhas</div>
+                    <div class="card-header"></div>
                     <div class="card-body">
                         @if(count($campaigns))
                             <table class="table table-dark" id="campaigns">

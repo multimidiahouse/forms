@@ -5,8 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header">Usuários</div>
-
+                    <div class="card-header">
+                        <a class="btn btn-secondary" href="/user/create">+ Adicionar</a>
+                    </div>
                     <div class="card-body">
                         @if(count($users))
                             <table class="table table-dark" id="users">

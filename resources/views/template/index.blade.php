@@ -5,8 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card bg-dark">
-                    <div class="card-header">Templates</div>
-
+                    <div class="card-header">
+                        <a class="btn btn-secondary" href="/template/create">+ Adicionar</a>
+                    </div>
                     <div class="card-body">
                         @if(count($templates))
                             <table class="table table-dark" id="templates">

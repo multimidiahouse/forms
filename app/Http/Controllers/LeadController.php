@@ -20,6 +20,7 @@ class LeadController extends Controller
 
     public function show($id)
     {
+        $campaign = Campaign::find($id);
         if (auth()->user()->admin)
             $leads = Lead::where('campaign_id', $id)->get();
         else
@@ -28,7 +29,7 @@ class LeadController extends Controller
                 ->where('campaign_user.user_id', auth()->id())
                 ->select('lead.*')
                 ->get();
-        return view('lead.show', compact('leads'));
+        return view('lead.show', compact('leads', 'campaign'));
     }
 
     public function store($slug)
@@ -58,6 +59,65 @@ class LeadController extends Controller
         {
             Lead::destroy($id);
             return back()->withInput();
+        }
+        catch (\Exception $e)
+        {
+            throw $e;
+        }
+    }
+
+    public function download($campaign)
+    {
+        try
+        {
+            $tmpName = tempnam(storage_path('cache'), 'infos_'.date('Y_m_d_H_i_s'));
+            $file = fopen($tmpName, 'w');
+
+            $leads = Lead::where('campaign_id', $campaign)->get();
+            $keys = [];
+            foreach ($leads as $lead)
+            {
+                $informations = json_decode($lead->information, true);
+                if(count($keys) == 0)
+                {
+                    foreach ($informations as $key => $value)
+                        $keys[] = trim($key);
+                    fwrite($file, implode(';', $keys) . PHP_EOL);
+                }
+                $values = [];
+                foreach ($informations as $key => $value)
+                    $values[] = trim($value);
+                fwrite($file, implode(';', $values) . PHP_EOL);
+            }
+            fclose($file);
+    
+            header('Content-Description: File Transfer');
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename=infos_'.date('Y_m_d_H_i_s').'.csv');
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($tmpName));
+    
+            ob_clean();
+            flush();
+            readfile($tmpName);
+    
+            unlink($tmpName);
+        }
+        catch (\Exception $e)
+        {
+            throw $e;
+        }
+    }
+
+    public function destroyall($campaign)
+    {
+        try
+        {
+            Lead::where('campaign_id', $campaign)->delete();
+            return back();
         }
         catch (\Exception $e)
         {

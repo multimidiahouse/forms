@@ -20,7 +20,7 @@ class CampaignController extends Controller
             foreach(CampaignUser::where('campaign_id', $campaign->id)->get() as $campaignuser)
             {
                 $user = User::find($campaignuser->user_id);
-                $campaignusers[$campaign->id][] = (object) ['name' => $user->name, 'email' => $user->email];
+                $campaignusers[$campaign->id][] = (object) ['name' => $user->name, 'email' => $user->email, 'id' => $campaignuser->id];
             }
         }
 
@@ -29,13 +29,21 @@ class CampaignController extends Controller
 
 	public function create()
 	{
-		$campaign = new Campaign();
+        $templates = Template::select('title', 'id')->get();
+        return view('campaign.templates', compact('templates'));
+    }
+    
+    public function createas($template)
+    {
+       
+        $campaign = new Campaign();
 		$campaign->title = 'Default';
 		$campaign->slug = $this->generateSlug(32);
 		$campaign->html = 'Copie e cole seu HTML';
         $campaign->response = 'Copie e cole seu HTML';
+        $campaign->mailing = 'Copie e cole seu HTML';
 
-		$template = Template::orderby('created_at', 'desc')->first();
+        $template = Template::find($template);		
 		if($template)
         {
             $campaign->html = $template->html;
@@ -43,7 +51,7 @@ class CampaignController extends Controller
         }
 
 		return view('campaign.create', compact('campaign'));
-	}
+    }
 
     public function show($slug)
     {
@@ -249,5 +257,18 @@ class CampaignController extends Controller
         readfile($tmpName);
 
         unlink($tmpName);
+    }
+
+    public function removeuser($id)
+    {
+        try
+        {
+            CampaignUser::destroy($id);
+            return redirect(route('campaign.index'));
+        }
+        catch (\Exception $e)
+        {
+            throw $e;
+        }
     }
 }
